@@ -20,7 +20,6 @@ const App = () => {
 				</div>
 			</nav>
 
-			<button onClick={() => setClick(click+1)}>{click}</button>
 		</div>
 	);
 }
