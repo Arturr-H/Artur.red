@@ -1,22 +1,43 @@
 import './App.css';
-import React, { useState } from "react";
+// import { Python, Javascript, React, Rust, Docker, Node } from  './assets/icons/icons';
 
 const App = () => {
 
-	const[click, setClick] = useState(0);
+	const Link = (p) => <a
+		className={p.active?"stroke":""}
+		href={"https://artur.red/" + p.location}
+		{...p}
+	>
+		{p.children}
+	</a>;
 	
 	return (
 		<div className="App">
 			<nav>
+
+				{/* Artur.red's logga */}
 				<div className="left">
-					<h2 className="logo">ARTUR RED</h2>
+					<h2 className="logo">
+						<span>{"||"}</span>
+						ARTUR RED
+					</h2>
 				</div>
+
 				<div className="right">
-					<a href="https://artur.red/">Home</a>
-					<a href="https://artur.red/about">About</a>
-					<a href="https://artur.red/contact">Contact</a>
-					<a href="https://artur.red/blog">Blog</a>
-					<a href="https://artur.red/projects">Projects</a>
+
+					{/* Använder mig av lambda funktionen
+					som jag tidigare skapade. */}
+					<Link location="#" active={true}>Home</Link>
+					<Link location="about">About</Link>
+					<Link location="contact">Contact</Link>
+					<Link location="blog">Blog</Link>
+					<Link location="projects">Projects</Link>
+
+					{/* Kommer inte vara synlig tills användaren
+					har en tillräckligt liten skärm. */}
+					<h2 className="logo">
+						<span>{"||"}</span>
+					</h2>
 				</div>
 			</nav>
 
