@@ -1,7 +1,11 @@
 import './App.css';
-// import { Python, Javascript, React, Rust, Docker, Node } from  './assets/icons/icons';
+import React from "react";
+import ContentMockup from "./assets/images/content-mockup.png";
 
 const App = () => {
+
+	const [messages, setMessages] = React.useState([]);
+	const ChatContentEnd = React.useRef();
 
 	const Link = (p) => <a
 		className={p.active?"stroke":""}
@@ -10,6 +14,28 @@ const App = () => {
 	>
 		{p.children}
 	</a>;
+
+
+	const submitChatForm = (e) => {
+		e.preventDefault();
+		
+		const form = e.target;
+		const message = 
+			new Date().getHours()
+			+ ":" + 
+			new Date().getMinutes()
+
+			 + " - "
+			
+			+ form.message.value;
+
+		if(message.length > 0) {
+			setMessages([...messages, message]);
+			form.message.value = "";
+
+			ChatContentEnd.current.scrollIntoView({ behavior: 'smooth' })
+		}
+	};
 	
 	return (
 		<div className="App">
@@ -41,6 +67,34 @@ const App = () => {
 				</div>
 			</nav>
 
+			<div className="b2x1">
+				<div>
+					<img className="mockup" src={ContentMockup} alt="Iphone mockup" />
+					<div className="mockup-content">
+						<div className="chat-container">
+							<div className="chat-content">
+								{
+									messages.map((message, index) => 
+										<div className="message" key={index}>
+											{message}
+										</div>
+									)
+								}
+								<div ref={ChatContentEnd}></div>
+							</div>
+							
+							<form autoComplete="off" id="chat-form" action="/" onSubmit={(e) => submitChatForm(e)}>
+								<input autocomplete="false" name="message" type="text" placeholder="Type a message..." />
+								<input type="submit" value="Send" />
+							</form>
+						</div>
+					</div>
+
+				</div>
+				<div>
+					<p>Hejsan jag gillar kakor med sås eftersom det är gott som fan.</p>
+				</div>
+			</div>
 		</div>
 	);
 }
